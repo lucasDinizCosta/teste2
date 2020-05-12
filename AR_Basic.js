@@ -60,7 +60,7 @@ function main()
 
   // create atToolkitContext
 	var arToolkitContext = new THREEx.ArToolkitContext({
-		cameraParametersUrl: '../libs/AR/data/camera_para.dat',
+		cameraParametersUrl: './libs/AR/data/camera_para.dat',
 		detectionMode: 'mono',
 	})
 
@@ -84,7 +84,7 @@ function main()
 	// init controls for camera
 	var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
 		type : 'pattern',
-		patternUrl : '../libs/AR/data/patt.kanji',
+		patternUrl : './libs/AR/data/patt.kanji',
 		changeMatrixMode: 'cameraTransformMatrix' // as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
 	})
 	// as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
