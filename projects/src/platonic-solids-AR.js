@@ -33,10 +33,12 @@ function main(){
 	renderer.domElement.style.left = '0px';
 	renderer.setSize( 640, 480 );
     //renderer.setSize(window.innerWidth, window.innerHeight);
+    // Adiciona a saída do renderizador para um elemento da página HTML
+    document.getElementById("webgl-output").appendChild(renderer.domElement);	//document.body.appendChild( renderer.domElement );
+    
 
-	// Adiciona a saída do renderizador para um elemento da página HTML
-	document.body.appendChild( renderer.domElement );
 	
+
 	// Show axes (parameter is size of each axis)
     var axes = new THREE.AxesHelper(0.8);
     axes.name = "AXES";
@@ -134,7 +136,10 @@ function main(){
 	}
 	
 	// GUI de controle e ajuste de valores especificos da geometria do objeto
-	/*var gui = new dat.GUI();
+    var gui = new dat.GUI();
+    
+    //document.getElementById("webgl-output").appendChild(gui.domElement);
+    
 
     var guiFolder = gui.addFolder("Properties");
     guiFolder.open();                                       // Open the folder
@@ -162,7 +167,7 @@ function main(){
     });
     guiFolder.add(controls, 'type', ['Tetrahedron','Cube', 'Octahedron', 'Dodecahedron', 'Icosahedron']).onChange(function(e){
         controls.choosePoligon();
-    });*/
+    });
 
     controls.choosePoligon();               // Update de selection of the polygon
 
@@ -262,7 +267,7 @@ function main(){
         }, 25);
         */
 
-       setTimeout(onResize, 100);
+       setTimeout(onResize, 1000);
     });
 
 	// handle resize
