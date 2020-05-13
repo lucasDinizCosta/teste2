@@ -112,6 +112,9 @@ function main(){
             }
             objectArray[this.meshNumber].visible = true;
             this.mesh = objectArray[this.meshNumber];
+            if(this.wireframe){
+                controls.mesh.children[0].visible = false;      //Black line
+            }
         }
 
         this.updateColor = function(){
