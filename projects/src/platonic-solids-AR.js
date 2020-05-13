@@ -32,7 +32,7 @@ function main(){
 	renderer.domElement.style.top = '0px';
 	renderer.domElement.style.left = '0px';
     renderer.setPixelRatio( window.devicePixelRatio );          //Improve Ratio of pixel in function of the of device
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize( window.innerWidth, window.innerHeight );  //640, 480
 
     //renderer.setSize(window.innerWidth, window.innerHeight);
     // Adiciona a saída do renderizador para um elemento da página HTML
@@ -180,7 +180,7 @@ function main(){
 
         // Border -- Black line
         var geo = new THREE.EdgesGeometry( object.geometry );
-        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1} );
+        var mat = new THREE.LineBasicMaterial( { color: 0x000000, transparent: true, opacity: 0.4 } );
         var borderLine = new THREE.LineSegments( geo, mat );
         borderLine.renderOrder = 1; // make sure wireframes are rendered 2nd
         borderLine.name = "borderLine";
