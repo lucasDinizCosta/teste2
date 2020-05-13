@@ -31,7 +31,6 @@ function main(){
 	renderer.domElement.style.position = 'absolute';
 	renderer.domElement.style.top = '0px';
 	renderer.domElement.style.left = '0px';
-    //renderer.setSize( 640, 480 );
     renderer.setPixelRatio( window.devicePixelRatio );          //Improve Ratio of pixel in function of the of device
     renderer.setSize( window.innerWidth, window.innerHeight );
 
@@ -55,18 +54,20 @@ function main(){
     objectMaterial.side = THREE.DoubleSide;     
 
     // Height of objects
-    var heightObjects = 0.25;
+    var heightObjects = 0.35;   //0.25
 
     // Add objects to scene
     var objectArray = new Array();
-    scene.add(createTetrahedron(0.28, 0));
-    scene.add(createCube(0.28));
-    scene.add(createOctahedron(0.28, 0));
-    scene.add(createDodecahedron(0.28, 0));
-    scene.add(createIcosahedron(0.28, 0));
-    
-    // Position of the cube
-	objectArray[1].position.y = 0.25;
+
+    criationObjects();
+
+    function criationObjects(){
+        scene.add(createTetrahedron(0.28, 0));
+        scene.add(createCube(0.28));
+        scene.add(createOctahedron(0.28, 0));
+        scene.add(createDodecahedron(0.28, 0));
+        scene.add(createIcosahedron(0.28, 0));
+    }
 	
 	// Controls of sidebar
     var controls = new function () {
@@ -119,21 +120,12 @@ function main(){
                 scene.remove(objectArray[i]);
             }
             objectArray = new Array();
-            objectMaterial = new THREE.MeshNormalMaterial({color:controls.color});//new THREE.MeshPhongMaterial({color:controls.color})
-            // Setting the material with new color
-
+            objectMaterial = new THREE.MeshBasicMaterial({color:controls.color});
             objectMaterial.side = THREE.DoubleSide;
             
             // Recreating those objects
-            scene.add(createTetrahedron(0.28, 0));
-            scene.add(createCube(0.28));
-            scene.add(createOctahedron(0.28, 0));
-            scene.add(createDodecahedron(0.28, 0));
-            scene.add(createIcosahedron(0.28, 0));
+            criationObjects();
             
-            // Position of the cube
-            objectArray[1].position.y = 0.25;
-
             controls.choosePoligon();
         }
 	}
@@ -159,10 +151,12 @@ function main(){
     });
     guiFolder.add(controls, 'wireframe').listen().onChange(function(e){
         if(controls.wireframe){
-        	objectMaterial.wireframe = true;
+            objectMaterial.wireframe = true;
+            controls.mesh.children[0].visible = false;      //Black line
         }
         else{
-        	objectMaterial.wireframe = false;
+            objectMaterial.wireframe = false;
+            controls.mesh.children[0].visible = true;
         }
     });
     guiFolder.add(controls, 'type', ['Tetrahedron','Cube', 'Octahedron', 'Dodecahedron', 'Icosahedron']).onChange(function(e){
@@ -176,10 +170,19 @@ function main(){
     {
         var geometry = new THREE.TetrahedronGeometry(radius, detail);
         var object = new THREE.Mesh(geometry, objectMaterial);
-        object.position.set(0.0, radius, 0.0);
-        object.rotation.z = 45;
+        object.position.set(0.0, heightObjects, 0.0);
+        object.rotation.y = 10;
         object.visible = false;
         object.name = "Tetrahedron";
+
+        // Border -- Black line
+        var geo = new THREE.EdgesGeometry( object.geometry );
+        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 4 } );
+        var borderLine = new THREE.LineSegments( geo, mat );
+        borderLine.renderOrder = 1; // make sure wireframes are rendered 2nd
+        borderLine.name = "borderLine";
+        object.add( borderLine );
+
         objectArray.push(object);
         return object;
     }
@@ -189,9 +192,18 @@ function main(){
     {
         let geometry = new THREE.BoxGeometry(s, s, s);
         let object = new THREE.Mesh(geometry, objectMaterial);
-        object.position.set(0.0, s/2.0, 0.0);
+        object.position.set(0.0, heightObjects, 0.0);
         object.visible = false;
         object.name = "Cube";
+
+        // Border
+        var geo = new THREE.EdgesGeometry( object.geometry );
+        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 4 } );
+        var borderLine = new THREE.LineSegments( geo, mat );
+        borderLine.renderOrder = 1; // make sure wireframes are rendered 2nd
+        borderLine.name = "borderLine";
+        object.add( borderLine );
+
         objectArray.push(object);
         return object;
     }
@@ -201,9 +213,18 @@ function main(){
     {
         var geometry = new THREE.OctahedronGeometry(radius, detail);
         var object = new THREE.Mesh(geometry, objectMaterial);
-        object.position.set(0.0, radius, 0.0);
+        object.position.set(0.0, heightObjects, 0.0);
         object.visible = false;
         object.name = "Octahedro";
+
+        // Border
+        var geo = new THREE.EdgesGeometry( object.geometry );
+        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 4 } );
+        var borderLine = new THREE.LineSegments( geo, mat );
+        borderLine.renderOrder = 1; // make sure wireframes are rendered 2nd
+        borderLine.name = "borderLine";
+        object.add( borderLine );
+
         objectArray.push(object);
         return object;
     }
@@ -213,9 +234,18 @@ function main(){
     {
         var geometry = new THREE.DodecahedronGeometry(radius, detail);
         var object = new THREE.Mesh(geometry, objectMaterial);
-        object.position.set(0.0, radius, 0.0);
+        object.position.set(0.0, heightObjects, 0.0);
         object.visible = false;
         object.name = "Dodecahedron";
+
+        // Border
+        var geo = new THREE.EdgesGeometry( object.geometry );
+        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 4 } );
+        var borderLine = new THREE.LineSegments( geo, mat );
+        borderLine.renderOrder = 1; // make sure wireframes are rendered 2nd
+        borderLine.name = "borderLine";
+        object.add( borderLine );
+
         objectArray.push(object);
         return object;
     }
@@ -225,9 +255,18 @@ function main(){
     {
         let geometry = new THREE.IcosahedronGeometry(radius, detail);
         let object = new THREE.Mesh(geometry, objectMaterial);
-        object.position.set(0.0, radius, 0.0);
+        object.position.set(0.0, heightObjects, 0.0);
         object.visible = false;
         object.name = "Icosahedron";
+
+        // Border
+        var geo = new THREE.EdgesGeometry( object.geometry );
+        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 4 } );
+        var borderLine = new THREE.LineSegments( geo, mat );
+        borderLine.renderOrder = 1; // make sure wireframes are rendered 2nd
+        borderLine.name = "borderLine";
+        object.add( borderLine );
+
         objectArray.push(object);
         return object;
     }
@@ -266,7 +305,6 @@ function main(){
             onResize()
         }, 25);
         */
-
        setTimeout(onResize, 1000);
     });
 
