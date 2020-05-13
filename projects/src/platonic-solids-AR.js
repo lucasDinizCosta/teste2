@@ -177,7 +177,7 @@ function main(){
 
         // Border -- Black line
         var geo = new THREE.EdgesGeometry( object.geometry );
-        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 4 } );
+        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1} );
         var borderLine = new THREE.LineSegments( geo, mat );
         borderLine.renderOrder = 1; // make sure wireframes are rendered 2nd
         borderLine.name = "borderLine";
@@ -198,7 +198,7 @@ function main(){
 
         // Border
         var geo = new THREE.EdgesGeometry( object.geometry );
-        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 4 } );
+        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1} );
         var borderLine = new THREE.LineSegments( geo, mat );
         borderLine.renderOrder = 1; // make sure wireframes are rendered 2nd
         borderLine.name = "borderLine";
@@ -219,7 +219,7 @@ function main(){
 
         // Border
         var geo = new THREE.EdgesGeometry( object.geometry );
-        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 4 } );
+        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1} );
         var borderLine = new THREE.LineSegments( geo, mat );
         borderLine.renderOrder = 1; // make sure wireframes are rendered 2nd
         borderLine.name = "borderLine";
@@ -240,7 +240,7 @@ function main(){
 
         // Border
         var geo = new THREE.EdgesGeometry( object.geometry );
-        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 4 } );
+        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1} );
         var borderLine = new THREE.LineSegments( geo, mat );
         borderLine.renderOrder = 1; // make sure wireframes are rendered 2nd
         borderLine.name = "borderLine";
@@ -261,7 +261,7 @@ function main(){
 
         // Border
         var geo = new THREE.EdgesGeometry( object.geometry );
-        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 4 } );
+        var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1} );
         var borderLine = new THREE.LineSegments( geo, mat );
         borderLine.renderOrder = 1; // make sure wireframes are rendered 2nd
         borderLine.name = "borderLine";
