@@ -31,14 +31,14 @@ function main(){
 	renderer.domElement.style.position = 'absolute';
 	renderer.domElement.style.top = '0px';
 	renderer.domElement.style.left = '0px';
-	renderer.setSize( 640, 480 );
+    //renderer.setSize( 640, 480 );
+    renderer.setPixelRatio( window.devicePixelRatio );          //Improve Ratio of pixel in function of the of device
+    renderer.setSize( window.innerWidth, window.innerHeight );
+
     //renderer.setSize(window.innerWidth, window.innerHeight);
     // Adiciona a saída do renderizador para um elemento da página HTML
     document.getElementById("webgl-output").appendChild(renderer.domElement);	//document.body.appendChild( renderer.domElement );
     
-
-	
-
 	// Show axes (parameter is size of each axis)
     var axes = new THREE.AxesHelper(0.8);
     axes.name = "AXES";
@@ -50,9 +50,12 @@ function main(){
     groundPlane.rotateX(degreesToRadians(-90));
 	scene.add(groundPlane);*/   
 	
-	// Object Material for all objects
-    var objectMaterial = new THREE.MeshNormalMaterial({color:"rgb(255, 0, 0)"});//new THREE.MeshPhongMaterial({color:"rgb(255, 0, 0)"});
+	// Object Material for all objects -- MeshNormalMaterial
+    var objectMaterial = new THREE.MeshBasicMaterial({color:"rgb(255, 0, 0)"});//new THREE.MeshPhongMaterial({color:"rgb(255, 0, 0)"});
     objectMaterial.side = THREE.DoubleSide;     
+
+    // Height of objects
+    var heightObjects = 0.25;
 
     // Add objects to scene
     var objectArray = new Array();
@@ -137,12 +140,9 @@ function main(){
 	
 	// GUI de controle e ajuste de valores especificos da geometria do objeto
     var gui = new dat.GUI();
-    
-    //document.getElementById("webgl-output").appendChild(gui.domElement);
-    
 
     var guiFolder = gui.addFolder("Properties");
-    guiFolder.open();                                       // Open the folder
+    //guiFolder.open();                                       // Open the folder
     guiFolder.add(controls, "axes").listen().onChange(function(e){
         if(controls.axes){
         	axes.visible = true;
@@ -280,7 +280,7 @@ function main(){
 		arToolkitSource.copyElementSizeTo(renderer.domElement);
 		if( arToolkitContext.arController !== null ){
 			arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas);
-		}
+        }
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////
